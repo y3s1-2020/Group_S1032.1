@@ -1,0 +1,41 @@
+package com;
+import model.Appointment;
+//For REST Service
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+//For JSON
+import com.google.gson.*;
+//For XML
+import org.jsoup.*;
+import org.jsoup.parser.*;
+import org.jsoup.nodes.Document;
+@Path("/Appointments")
+public class AppointmentService
+{
+Appointment Object1 = new Appointment();
+@GET
+@Path("/")
+@Produces(MediaType.TEXT_HTML)
+public String readAppointment()
+{
+return Object1.readAppointment();
+}
+
+
+@POST
+@Path("/")
+@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+@Produces(MediaType.TEXT_PLAIN)
+public String insertAppointment(@FormParam("patientName") String patientName,
+@FormParam("doctorName") String doctorName,
+@FormParam("appointmentNumber") String appointmentNumber,
+@FormParam("hospitalName") String hospitalName,
+@FormParam("time") String time,
+@FormParam("date") String date)
+{
+String output = Object1.insertAppointment(patientName, doctorName, appointmentNumber, hospitalName, time, date);
+return output;
+}
+
+
+}
